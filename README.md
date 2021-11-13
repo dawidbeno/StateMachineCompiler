@@ -10,6 +10,7 @@ As in main manu, also in game over state we have to option:
 
 This is state machine for ordinary gameplay with three states and several transitions between them. See the image below.
 
+
 ![state machine diagram](game_sm.jpg)
 
 # Game process
@@ -42,13 +43,55 @@ void GameProcess::BackToMenu(){
 
 
 # State Machine Compiler
+State machine compiler or SMC is a java application, which is able to analyze content of *.sm* file and convert it to required programming language. *.sm* file is a special file, written in simple, common language used to describe any finite state machine. Output after compilation is a class in particular programming language, which was defined before compilation. Thanks to the State Machine Compiler, you can put state diagram into one file and generate class for programming language used in your project.
+There are more ten 10 programming languages supported by SMC. More information about SMC on ![this link](http://smc.sourceforge.net/)
 
-SMC generates finite state machines for objects - not processes or applications but for an individual object. If you have objects that receive asynchronous callbacks and how objects respond to those callbacks are based on the object state, then SMC provides a powerful solution.
-Thanks to the State Machine Compiler, you can put state diagram into one file written in a simple language and generate class for a wide range of programming languages.
+## Feauters of SMC
+Inside ths *.sm* file, there is a file header. It defines class name
+```
+%class GameProcess
+%fsmclass GameProvess_sm
+%fsmfile GameProvess_sm
 
+%header GameProvess.hpp
+```
+- The **%class** keyword which specifies the application class to which this FSM is associated: GameProcess
+- The **%fsmclass** keyword specifies the generated finite state machine class name
+- The **%fsmfile** keyword specifies the generated finite state machine class file name
+- The **%header** keyword specifies the header file, which contains methods used in state machine. E.g. fsmPrint()
 
-# Features
-## Transitions
+### States
+Then we have defined states, based on precreated diagram.
+- **%map** SMC states are grouped into maps. The %map followed by a %% pair groups the states appearing within
+- **%start** keyword specifies the FSM's start state
+```
+%start GameMap::NotStarted
+%map GameMap
+%%
+
+NotStarted
+{
+
+}
+
+MainMenu
+{
+
+}
+
+Playing
+{
+
+}
+
+GameOver
+{
+
+}
+%%
+```
+
+### Transitions
 Simple Transiiton
 External Loopback Transition
 Internal Loopback Transition
@@ -58,9 +101,6 @@ Pop Transition
 ## Entry / Exit Actions
 ## transition guards
 
-
-# .sm file
-Let's create a state machine file to define all these state and transitions. 
 
 
 # Compiling .sm file

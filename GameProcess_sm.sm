@@ -1,0 +1,30 @@
+
+%class GameProcess
+%fsmclass GameProvess_sm
+%fsmfile GameProvess_sm
+%header GameProvess.hpp
+
+%start GameMap::NotStarted
+%map GameMap
+%%
+
+NotStarted
+{
+
+}
+
+MainMenu
+{
+
+}
+
+Playing
+{
+
+}
+
+GameOver
+{
+
+}
+%%
